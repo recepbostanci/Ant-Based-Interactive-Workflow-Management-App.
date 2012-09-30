@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Merhaba" default="compile">
+
+<target name="compile" id="2">
+   <javac srcdir="C:\Ant\siniflar" destdir="C:\Ant\siniflar\info">
+      <classpath refid="master-classpath">
+</classpath>
+</javac>
+</target>
+
+   <target name="jar" id="3" depends="compile">
+   <jar destfile="c:\Ant\recep.jar">
+   <fileset dir="c:/ant/siniflar/info" includes="**/*.class">
+</fileset>
+    <manifest>
+	<attribute name="Main-Class" value="thesis.FormAna"/>
+    </manifest>
+</jar>
+</target>
+
+   <path id="master-classpath">
+      <fileset dir="C:/Ant/kutuphaneler" includes="*.jar">
+      </fileset>
+   </path>
+
+   <target name="send" id="4" depends="jar">
+   <ftp server="ftp.recepbostanci.com" remotedir="/anon_ftp/pub" userid="recepbostanci" password="safkar78">
+       <fileset dir="c:/ant" includes="*.jar">
+       </fileset>
+</ftp>
+</target>
+
+    <target id="5" name="run">
+            <exec dir="c:\" executable="cmd">
+	 <arg value="/c"/>
+    	<arg value="c:\Ant\recep.jar"/>
+    	<arg value="-p"/>
+            </exec>
+        </target>
+
+</project>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="dene3" >
+
+<target name="compile" id="2">
+   <javac srcdir="C:\JAVA-NETBEANS-WORKS\JavaApplication1\src\javaapplication1" destdir="C:\JAVA-NETBEANS-WORKS\JavaApplication1\src\javaapplication1\info">
+      <classpath refid="master-classpath">
+</classpath>
+</javac>
+</target>
+
+   <target name="jar" id="3" depends="compile">
+   <jar destfile="C:\JAVA-NETBEANS-WORKS\JavaApplication1\recep.jar">
+   	<fileset dir="C:\JAVA-NETBEANS-WORKS\JavaApplication1\src\javaapplication1\info" includes="**/*.class">
+	</fileset>
+    <manifest>
+	<attribute name="Main-Class" value="javaapplication1.NewJFrame"/>
+    </manifest>
+</jar>
+</target>
+
+   <path id="master-classpath">
+      <fileset dir="C:/Ant/kutuphaneler" includes="*.jar">
+      </fileset>
+   </path>
+      <target id="8" name="run">
+            <exec dir="c:\" executable="cmd">
+	 <arg value="/c"/>
+    	<arg value="C:\JAVA-NETBEANS-WORKS\JavaApplication1\recep.jar"/>
+    	<arg value="-p"/>
+            </exec>
+        </target>
+
+</project>
+

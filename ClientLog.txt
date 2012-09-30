@@ -1,0 +1,7 @@
+Date & Time      :2012/Haz/28 13:10:17
+Hostname         :user-PC
+IP Address       :192.168.1.3
+******************************************
+Value-1 <> Value-2 :123 <> 767
+Operation        :Carp
+Result           :94341

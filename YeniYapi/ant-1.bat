@@ -1,0 +1,1 @@
+ant -file C:\ThesisApp\YeniYapi\xmlDenemeleri\build.xml runRMIClientOnly

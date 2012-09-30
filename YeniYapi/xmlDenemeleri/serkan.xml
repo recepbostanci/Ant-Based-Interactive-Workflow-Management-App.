@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="serkan" default="compile">
+ <target name="compile" id="2"  description="">   
+   <javac srcdir="c:/ant/siniflar">
+   </javac>
+</target>
+
+ <target name="jar" id="3" description="" depends="compile">
+   <jar destfile="c:/ant/merhaba.jar">  
+       <fileset dir="c:/ant/siniflar" includes="**/*.class">
+       </fileset>
+</jar>
+</target>
+</project>

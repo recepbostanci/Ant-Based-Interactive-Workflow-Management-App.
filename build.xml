@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ExampleWork" default="run">
+  <target id="1" name="compile" description="Java kaynak kodunu sinif dosyalarina derle">
+    <javac srcdir="C:/myWorkSpace/ResultofClient/src" destdir="C:/myWorkSpace/ResultofClient/src/comp">
+    </javac>
+  </target>
+  <target id="2" name="jar" depends="compile" description="uygulama icin bir jar dosyasi olustur">
+    <jar destfile="C:/myWorkSpace/ResultofClient/ResultofClient.jar">
+      <fileset dir="C:/myWorkSpace/ResultofClient/src/comp" includes="**/*.class" />
+      <manifest>
+        <attribute name="Main-Class" value="thesis.AnaForm" />
+      </manifest>
+    </jar>
+  </target>
+  <target id="3" name="run" depends="jar,GetClientLog">
+    <exec dir="c:\" executable="cmd">
+      <arg value="/c" />
+      <arg value="java -jar C:/myWorkSpace/ResultofClient/ResultofClient.jar" />
+      <arg value="-p" />
+    </exec>
+  </target>
+  <target id="4" name="runRMIServerOnly" >
+    <sshexec host="192.168.1.2"
+     username="rmiS"
+           password="Kocaeli41"
+           trust="true"
+           command="java -jar c:/RMIServer.jar"
+           timeout="0">
+    </sshexec>
+  </target>
+  <target id="5" name="runRMIClientOnly" >
+    <sshexec host="192.168.1.3"
+     username="rmiC"
+     password="Kocaeli41"
+     trust="true"
+     command="java -jar c:/RMIClient.jar"/>
+  </target>
+  <target id="6" name="RMI-Server-Client-Run">
+    <parallel>
+      <sshexec host="192.168.1.3"
+        username="rmiC"
+        password="Kocaeli41"
+        trust="true"
+        command="java -jar c:/RMIClient.jar"/>
+      <sshexec host="192.168.1.2"
+         username="rmiS"
+         password="Kocaeli41"
+         trust="true"
+         command="java -jar c:/RMIServer.jar"
+         timeout="0">
+      </sshexec>
+    </parallel>
+  </target>
+  <target id="7" name="GetClientLog" depends="RMI-Server-Client-Run">
+    <scp file="rmiC:Kocaeli41@192.168.1.3://ClientLog.txt" todir="/myWorkSpace/"
+       verbose="true"
+       trust="true"
+       sftp="true"
+       failonerror="true"/>
+  </target>
+</project>
